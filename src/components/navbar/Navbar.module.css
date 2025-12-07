@@ -27,7 +27,7 @@
   justify-content: center;
   align-items: center;
   background-color: #73b4fa;
-  border: 1px solid #0055b1;
+  border: 1px solid #007bff;
 }
 .title {
   font-weight: 600;
@@ -51,7 +51,6 @@
   color: var(--color-text);
 }
 .tabActive {
-  composes: tab;
   background: var(--color-bg);
   color: var(--color-text);
   box-shadow: var(--shadow-sm);

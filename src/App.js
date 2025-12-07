@@ -1,6 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
-
-import { COUNTRY_RATES, COUNTRIES } from "./models/rates.js";
+import { useEffect, useReducer, useState } from "react";
 
 import layout from "./styles/layout.module.css";
 import {
@@ -13,7 +11,6 @@ import AddBoxView from "./view/AddBoxView.jsx";
 import BoxesView from "./view/BoxesView.jsx";
 import { initialState, reducer } from "./state/boxReducer.js";
 import Navbar from "./components/navbar/Navbar.jsx";
-import { formatINR } from "./utils/formatting.js";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
