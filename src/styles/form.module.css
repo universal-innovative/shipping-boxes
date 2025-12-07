@@ -1,0 +1,57 @@
+.field {
+  display: grid;
+  gap: 6px;
+}
+.fieldRow {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-l);
+  align-items: end;
+}
+.label {
+  font-weight: 600;
+  font-size: var(--text-s);
+}
+.input,
+.select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+}
+.input:focus,
+.select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.12);
+  border-color: #c9ccd1;
+}
+.color {
+  width: 56px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  background: var(--color-bg);
+}
+.error {
+  color: var(--color-error);
+  font-size: var(--text-s);
+}
+.primaryBtn {
+  appearance: none;
+  border: none;
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  padding: 10px 14px;
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+.primaryBtn:hover {
+  filter: brightness(0.96);
+}
+.primaryBtn:active {
+  transform: translateY(1px);
+}

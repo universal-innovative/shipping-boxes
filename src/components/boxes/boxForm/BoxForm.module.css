@@ -1,0 +1,42 @@
+.form {
+  display: grid;
+  gap: var(--space-m);
+}
+.rgbReadout {
+  align-self: end;
+  margin-bottom: 4px;
+  color: var(--color-text-muted);
+  font-size: var(--text-s);
+}
+.actions {
+  display: flex;
+  gap: 4px;
+  padding-top: var(--space-s);
+  align-items: center;
+}
+.successMsg {
+  margin-top: 8px;
+  color: #047857;
+  font-size: 0.9rem;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease;
+}
+
+.errorMsg {
+  margin-top: 8px;
+  color: #b91c1c;
+  font-size: 0.9rem;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
