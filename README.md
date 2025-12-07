@@ -1,70 +1,111 @@
-# Getting Started with Create React App
+# Shipping Box – MVC React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Live demo 👇
 
-## Available Scripts
+https://lucky-swan-3718fa.netlify.app/#form
 
-In the project directory, you can run:
+A tiny single‑page app to capture shipping boxes and compute INR shipping cost by destination. Built with **React (CRA)** following an **MVC-style** separation:
 
-### `npm start`
+- **Model**: data logic (rates, box creation, cost, normalization)
+- **Controller**: validation, orchestration, API calls, request flow
+- **View**: components/views with modular CSS
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- View A: **Add Box** form (receiver, weight, color picker → stored as `rgb(r,g,b)`, country)
+- View B: **Boxes Table** (color swatch, INR currency formatting)
+- **Navbar** tabs: Add Box ⇄ Boxes
+- **Validation**: required fields; negative weight shows error and resets to `0` (spec compliant)
+- **Responsive** UI with **CSS Modules** + design tokens
+- **Local storage mock API** (two endpoints): `listBoxes()`, `saveBox()`
+- **.env configuration** (CRA `REACT_APP_` variables with safe fallbacks)
+- **Hash-based routing** without external deps (router isolated in `src/routes/routes.js`)
 
-### `npm test`
+## Architecture (MVC)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+src/
+  App.jsx
+  components/
+    Navbar/
+      Navbar.jsx
+      Navbar.module.css
+    boxes/
+      BoxForm/
+        BoxForm.jsx
+        BoxForm.module.css
+      BoxesTable/
+        BoxesTable.jsx
+        BoxesTable.module.css
+      ColorSwatch/
+        ColorSwatch.jsx
+        ColorSwatch.module.css
 
-### `npm run build`
+  controllers/
+    boxesController.js       # validate, create, list (business + flow)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  models/
+    box.js                   # normalizeWeight, computeCost, makeBox
+    rates.js                 # COUNTRY_RATES from env + fallbacks
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  routes/
+    routes.js                # tiny hash router (subscribe/navigate)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  services/
+    api/
+      boxApi.js              # localStorage mock endpoints
 
-### `npm run eject`
+  state/
+    boxReducer.js            # boxes, loading, error (no route state)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  styles/
+    tokens.css               # design tokens
+    global.css               # base styles
+    layout.module.css        # layout helpers/cards/banner
+    form.module.css          # shared form styles
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  utils/
+    formatting.js            # INR formatter
+    hexToRgbString.js        # color conversion
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Tech Stack
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **React 19** (Create React App)
+- **CSS Modules** (scoped styles)
+- No external runtime dependencies
 
-## Learn More
+2. **Create `.env`** (project root)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   ```env
+   REACT_APP_RATE_SWEDEN=7.35
+   REACT_APP_RATE_CHINA=11.53
+   REACT_APP_RATE_BRAZIL=15.63
+   REACT_APP_RATE_AUSTRALIA=50.09
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. **Run**
 
-### Code Splitting
+   ```bash
+   npm start
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+4. Open [http://localhost:3000](http://localhost:3000)
 
-### Analyzing the Bundle Size
+> CRA loads env vars at startup. If you change `.env`, stop and re‑run `npm start`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## ⚙️ Scripts
 
-### Making a Progressive Web App
+```bash
+npm start   # dev server (CRA)
+npm run build  # production build (minified in build/)
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🔐 Environment Config
 
-### Advanced Configuration
+Env vars must start with `REACT_APP_` in CRA. Used keys:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `REACT_APP_RATE_SWEDEN`
+- `REACT_APP_RATE_CHINA`
+- `REACT_APP_RATE_BRAZIL`
+- `REACT_APP_RATE_AUSTRALIA`

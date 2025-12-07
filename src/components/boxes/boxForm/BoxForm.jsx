@@ -73,7 +73,6 @@ const BoxFrom = ({ onSubmit }) => {
       }, 3000);
     }
   };
-  console.log(status);
 
   return (
     <form onSubmit={handleSubmit} className={styles.form} noValidate>
